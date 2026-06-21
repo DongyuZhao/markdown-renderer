@@ -1,7 +1,30 @@
 # markdown-renderer
 
-The mono repo provides optimized Markdown rendering packages for iOS, macOS, Android, and Web:
+Monorepo for optimized Markdown rendering packages across iOS, macOS, Android, and Web.
 
-- iOS/macOS via Swift Package Manager (SPM): `swiftui-markdown`
-- Android via Jetpack Compose package conventions: `compose-markdown`
-- Web via React package conventions: `react-markdown`
+## Packages
+
+- `packages/swiftui-markdown` (SPM package for iOS/macOS)
+- `packages/compose-markdown` (Jetpack Compose package for Android)
+- `packages/react-markdown` (React package for Web)
+
+## Quick start
+
+### iOS/macOS (`swiftui-markdown`)
+
+```bash
+cd packages/swiftui-markdown
+swift build
+```
+
+### Android (`compose-markdown`)
+
+Import `packages/compose-markdown` as an Android library module in your Android project.
+
+### Web (`react-markdown`)
+
+```bash
+cd packages/react-markdown
+npm install
+npm run build
+```
