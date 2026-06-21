@@ -2,20 +2,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "swiftui-markdown",
+    name: "swift-markdown-render",
     platforms: [
         .iOS(.v15),
         .macOS(.v12)
     ],
     products: [
         .library(
-            name: "swiftui-markdown",
-            targets: ["SwiftUIMarkdown"]
+            name: "swift-markdown-render",
+            targets: ["SwiftMarkdownRender"]
         )
     ],
     targets: [
         .target(
-            name: "SwiftUIMarkdown"
+            name: "SwiftMarkdownRender"
         )
     ]
 )

@@ -4,16 +4,16 @@ Monorepo for optimized Markdown rendering packages across iOS, macOS, Android, a
 
 ## Packages
 
-- `packages/swiftui-markdown` (SPM package for iOS/macOS)
+- `packages/swift-markdown-render` (SPM package for iOS/macOS)
 - `packages/compose-markdown` (Jetpack Compose package for Android)
 - `packages/react-markdown` (React package for Web)
 
 ## Quick start
 
-### iOS/macOS (`swiftui-markdown`)
+### iOS/macOS (`swift-markdown-render`)
 
 ```bash
-cd packages/swiftui-markdown
+cd packages/swift-markdown-render
 swift build
 ```
 
