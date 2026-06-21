@@ -1,0 +1,13 @@
+.DS_Store
+
+# Swift Package Manager
+.build/
+
+# Node.js
+node_modules/
+dist/
+
+# Android/Gradle
+.gradle/
+build/
+local.properties

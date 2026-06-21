@@ -1,3 +1,4 @@
+#if canImport(SwiftUI)
 import SwiftUI
 
 public struct MarkdownText: View {
@@ -11,3 +12,12 @@ public struct MarkdownText: View {
         Text(markdown)
     }
 }
+#else
+public struct MarkdownText {
+    public let markdown: String
+
+    public init(_ markdown: String) {
+        self.markdown = markdown
+    }
+}
+#endif
