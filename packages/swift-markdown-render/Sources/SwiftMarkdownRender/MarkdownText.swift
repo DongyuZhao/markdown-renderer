@@ -1,15 +1,55 @@
+import cmark_gfm
+
 #if canImport(SwiftUI)
 import SwiftUI
+import WebKit
+
+private func markdownToHTML(_ markdown: String) -> String {
+    let utf8Count = markdown.utf8.count
+    return markdown.withCString { ptr in
+        guard let result = cmark_markdown_to_html(ptr, utf8Count, CMARK_OPT_DEFAULT) else {
+            return ""
+        }
+        defer { free(result) }
+        return String(cString: result)
+    }
+}
+
+#if os(iOS)
+private struct MarkdownWebView: UIViewRepresentable {
+    let html: String
+
+    func makeUIView(context: Context) -> WKWebView {
+        WKWebView()
+    }
+
+    func updateUIView(_ view: WKWebView, context: Context) {
+        view.loadHTMLString(html, baseURL: nil)
+    }
+}
+#elseif os(macOS)
+private struct MarkdownWebView: NSViewRepresentable {
+    let html: String
+
+    func makeNSView(context: Context) -> WKWebView {
+        WKWebView()
+    }
+
+    func updateNSView(_ view: WKWebView, context: Context) {
+        view.loadHTMLString(html, baseURL: nil)
+    }
+}
+#endif
 
 public struct MarkdownText: View {
-    private let markdown: LocalizedStringKey
+    private let html: String
 
     public init(_ markdown: String) {
-        self.markdown = LocalizedStringKey(markdown)
+        self.html = markdownToHTML(markdown)
     }
 
     public var body: some View {
-        Text(markdown)
+        MarkdownWebView(html: html)
     }
 }
 #else
