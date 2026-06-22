@@ -13,9 +13,15 @@ let package = Package(
             targets: ["SwiftMarkdownRender"]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/DongyuZhao/cmark-gfm", branch: "main")
+    ],
     targets: [
         .target(
-            name: "SwiftMarkdownRender"
+            name: "SwiftMarkdownRender",
+            dependencies: [
+                .product(name: "cmark-gfm", package: "cmark-gfm")
+            ]
         )
     ]
 )
