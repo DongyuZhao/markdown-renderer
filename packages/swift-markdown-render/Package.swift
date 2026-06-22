@@ -14,7 +14,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/DongyuZhao/cmark-gfm", branch: "main")
+        .package(url: "https://github.com/DongyuZhao/cmark-gfm", branch: "master")
     ],
     targets: [
         .target(
