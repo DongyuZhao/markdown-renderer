@@ -2,7 +2,7 @@ import cmark_gfm
 
 #if canImport(SwiftUI)
 import SwiftUI
-import WebKit
+import Foundation
 
 private func markdownToHTML(_ markdown: String) -> String {
     let utf8Count = markdown.utf8.count
@@ -15,41 +15,32 @@ private func markdownToHTML(_ markdown: String) -> String {
     }
 }
 
-#if os(iOS)
-private struct MarkdownWebView: UIViewRepresentable {
-    let html: String
-
-    func makeUIView(context: Context) -> WKWebView {
-        WKWebView()
+private func htmlToAttributedString(_ html: String, fallbackText: String) -> AttributedString {
+    guard let data = html.data(using: .utf8),
+          let attributed = try? NSAttributedString(
+              data: data,
+              options: [
+                  .documentType: NSAttributedString.DocumentType.html,
+                  .characterEncoding: String.Encoding.utf8.rawValue
+              ],
+              documentAttributes: nil
+          ) else {
+        return AttributedString(fallbackText)
     }
 
-    func updateUIView(_ view: WKWebView, context: Context) {
-        view.loadHTMLString(html, baseURL: nil)
-    }
+    return AttributedString(attributed)
 }
-#elseif os(macOS)
-private struct MarkdownWebView: NSViewRepresentable {
-    let html: String
-
-    func makeNSView(context: Context) -> WKWebView {
-        WKWebView()
-    }
-
-    func updateNSView(_ view: WKWebView, context: Context) {
-        view.loadHTMLString(html, baseURL: nil)
-    }
-}
-#endif
 
 public struct MarkdownText: View {
-    private let html: String
+    private let attributedMarkdown: AttributedString
 
     public init(_ markdown: String) {
-        self.html = markdownToHTML(markdown)
+        let html = markdownToHTML(markdown)
+        self.attributedMarkdown = htmlToAttributedString(html, fallbackText: markdown)
     }
 
     public var body: some View {
-        MarkdownWebView(html: html)
+        Text(attributedMarkdown)
     }
 }
 #else
