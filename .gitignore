@@ -2,6 +2,7 @@
 
 # Swift Package Manager
 .build/
+.swiftpm/
 
 # Node.js
 node_modules/

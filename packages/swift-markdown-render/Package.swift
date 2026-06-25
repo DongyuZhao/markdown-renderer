@@ -22,6 +22,10 @@ let package = Package(
             dependencies: [
                 .product(name: "cmark-gfm", package: "cmark-gfm")
             ]
+        ),
+        .testTarget(
+            name: "SwiftMarkdownRenderTests",
+            dependencies: ["SwiftMarkdownRender"]
         )
     ]
 )
